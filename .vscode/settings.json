@@ -1,0 +1,18 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "10.67.126.63",
+            "port": 3306,
+            "driver": "MariaDB",
+            "name": "Servidor 63",
+            "group": "Imbel",
+            "username": "teste",
+            "password": "my20201mb3l#",
+            "database": "rh"
+        }
+    ]
+}

@@ -1,5 +1,9 @@
 <?php
 
-use App\Controller\Home;
+require_once('./vendor/autoload.php');
 
-$home = new Home();
+use App\Controller\HomeController;
+
+$home = new HomeController();
+
+dd($home->teste());

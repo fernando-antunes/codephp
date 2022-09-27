@@ -2,11 +2,14 @@
 
 namespace App\Controller;
 
-class Home
+class HomeController
 {
-
     public function __construct()
     {
         echo 'estamos aqui!';
+    }
+
+    public function teste(){
+        return ['nome' => 'Fernando'];
     }
 }
