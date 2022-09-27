@@ -1,6 +1,5 @@
 <?php
-// include_once 'config.php';
 
-echo freeCodeCamp;
+use App\Controller\Home;
 
-// echo "teste";
+$home = new Home();

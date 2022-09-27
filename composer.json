@@ -6,5 +6,10 @@
             "email": "fernando.a.n@hotmail.com"
         }
     ],
-    "require": {}
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "app\\": "App/"
+        }
+    }
 }
