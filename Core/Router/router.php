@@ -2,9 +2,71 @@
 
 namespace Core;
 
-class Router{
+class Router
+{
+
+    private $uri;
+    private $method;
+    private $getArr = [];
+
     public function __construct()
     {
-        echo 'core';
+        //Inicializa os REQUEST's
+        $this->inicializer();
+
+        //Chama as rotas criadas
+        require_once('./App/Config/Router.php');
+
+        //Executa as rotas
+        $this->execute();
+    }
+
+    private function inicializer()
+    {
+        $this->method = $_SERVER['REQUEST_METHOD'];
+        $request_uri = $_SERVER['REQUEST_URI'];
+
+        //Pega a primeira e a segunda posição da URI que seriam a 1-controller e a 2-method
+        $this->uri = segment_array([1, 2], []);
+    }
+
+    private function get($router, $call)
+    {
+        $this->getArr[] = [
+            'router' => $router,
+            'call' => $call
+        ];
+    }
+
+    private function execute()
+    {
+        switch ($this->method) {
+            case 'GET':
+                $this->executeGet();
+                break;
+
+            case 'POST':
+
+                break;
+
+            default:
+                # code...
+                break;
+        }
+    }
+
+    private function executeGet()
+    {
+        //Pega as rotas definidas
+        foreach ($this->getArr as $get) {
+            //Verifica se a rota digitada esta nas definidas
+            if ($get['router'] == segment_array([1, 2], [], '/')) {
+                if (is_callable($get['call'])) {
+                    //Chama a call que esta sendo requisitada
+                    $get['call']();
+                    break;
+                }
+            }
+        }
     }
 }

@@ -12,7 +12,7 @@
             "App\\": "App/"
         },
         "files": [
-            "./Core/functions/functions.php",
+            "./Core/Functions/functions.php",
             "./Core/Router/router.php"
         ]
     }
