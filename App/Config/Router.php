@@ -1,8 +1,8 @@
 <?php
 
-$this->get('/', function () {
-    echo 'Estou na index!!!';
-});
+use App\Controller\HomeController;
+
+$this->get('/', [HomeController::class, 'index']);
 
 $this->get('home', function () {
     echo 'Estou na Home!!!';

@@ -6,10 +6,10 @@ class HomeController
 {
     public function __construct()
     {
-        echo 'estamos aqui!';
+        // echo 'estamos aqui!';
     }
 
-    public function teste(){
-        return ['nome' => 'Fernando'];
+    public function index(){
+        echo '123';
     }
 }
