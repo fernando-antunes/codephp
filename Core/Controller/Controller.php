@@ -1,10 +1,11 @@
 <?php
 
-namespace Core;
+namespace Core\Controller;
 
 class Controller
 {
-    protected function load(string $view, $params = [])
+    protected static function view(string $view, $params = [])
     {
+        echo file_get_contents('../View/' . $view . '.php');
     }
 }

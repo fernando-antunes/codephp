@@ -2,14 +2,12 @@
 
 namespace App\Controller;
 
-class HomeController
-{
-    public function __construct()
-    {
-        // echo 'estamos aqui!';
-    }
+use Core\Controller\Controller;
 
-    public function index(){
-        echo '123';
+class HomeController extends Controller
+{
+    public function index()
+    {
+       $this->view('home');
     }
 }
