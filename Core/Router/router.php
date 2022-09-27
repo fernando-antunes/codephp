@@ -61,18 +61,11 @@ class Router
     {
         //Pega as rotas definidas
         foreach ($this->getArr as $get) {
-
-            //Pega as functions da class
-            $class = get_class_methods((new $get['call'][0]));
-
             //Verifica se a rota digitada esta nas definidas
             if ($get['router'] == segment_array([1, 2], [], '/')) {
-                //Faz a busca da function na class
-                if (array_search($get['call'][1], $class)) {
-                    //Chama a call que esta sendo requisitada
-                    call_user_func(array(new $get['call'][0], $get['call'][1]));
-                    break;
-                }
+                //Chama a call que esta sendo requisitada
+                call_user_func(array(new $get['call'][0], $get['call'][1]));
+                break;
             }
         }
     }
