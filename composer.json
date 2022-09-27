@@ -1,5 +1,10 @@
 {
-    "autoload": {
-        "classmap": ["config.php"]
-    }
+    "name": "fernando-antunes/codephp",
+    "authors": [
+        {
+            "name": "Fernando Antunes Cardoso",
+            "email": "fernando.a.n@hotmail.com"
+        }
+    ],
+    "require": {}
 }
