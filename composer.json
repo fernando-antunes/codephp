@@ -16,5 +16,8 @@
             "./Core/Controller/controller.php",
             "./App/Config/Config.php"
         ]
+    },
+    "require": {
+        "jenssegers/blade": "^1.4"
     }
 }

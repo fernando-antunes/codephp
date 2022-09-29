@@ -2,10 +2,14 @@
 
 namespace Core\Controller;
 
+use Jenssegers\Blade\Blade;
+
 class Controller
 {
     protected static function view(string $view, $params = [])
     {
-        echo file_get_contents('../View/' . $view . '.php');
+        $blade = new Blade('./App/View/', './Cache/view/');
+
+        echo $blade->make($view, $params)->render();
     }
 }
