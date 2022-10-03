@@ -2,7 +2,7 @@
 
 namespace Core;
 
-use App\Controller\HomeController;
+
 
 class Router
 {
@@ -23,20 +23,26 @@ class Router
         $this->execute();
     }
 
-    private function inicializer()
+    private function mensage($mensage)
     {
-        $this->method = $_SERVER['REQUEST_METHOD'];
-        $request_uri = $_SERVER['REQUEST_URI'];
+        include('./Core/Language/' . LANGUAGE . '/router.php');
 
-        //Pega a primeira e a segunda posição da URI que seriam a 1-controller e a 2-method
-        $this->uri = segment_array([1, 2], []);
+        return $languageRouter[$mensage];
     }
 
-    private function get($router, $call)
+    private function inicializer()
+    {
+        //Captura o uri e method
+        $this->method = $_SERVER['REQUEST_METHOD'];
+        $this->uri = $_SERVER['REQUEST_URI'];
+    }
+
+    private function get($router, $call, $method)
     {
         $this->getArr[] = [
             'router' => $router,
-            'call' => $call
+            'call' => $call, 
+            'method' => $method
         ];
     }
 
@@ -59,14 +65,52 @@ class Router
 
     private function executeGet()
     {
-        //Pega as rotas definidas
-        foreach ($this->getArr as $get) {
-            //Verifica se a rota digitada esta nas definidas
-            if ($get['router'] == segment_array([1, 2], [], '/')) {
-                //Chama a call que esta sendo requisitada
-                call_user_func(array(new $get['call'][0], $get['call'][1]));
-                break;
+
+        // dd($this->getArr);
+
+        //Pega os parametros GET recebido
+        $params_get = segment_array([], [0, 1], ',');
+
+        //Pega a rota
+        if (segment(1) != '') {
+            $router = segment(1);
+        } else {
+            $router = '/';
+        }
+
+        foreach ($this->getArr as $val) {
+            if ($router == $val['router']) {
+                $controller_name = $val['call'];
+                $controller_function = $val['method'];
             }
         }
+
+        //Verifica se não esta vazio o $method
+        if (empty($controller_name)) {
+            echo 'Rota não encontrada!';
+        }
+
+        $controller = "\\App\\Controller\\" . $controller_name;
+
+        $instance = new $controller;
+
+        // dd($params_get);
+
+        echo call_user_func_array([$instance, $controller_function], [$params_get]);
+
+        // dd($instance);
+
+        //Pega as rotas definidas
+        // foreach ($this->getArr as $get) {
+        //     //Verifica se a rota digitada esta nas definidas
+        //     if ($get['router'] == segment_array([1, 2], [], '/')) {
+        //         //Chama a call que esta sendo requisitada
+        //         call_user_func(array(new $get['call'][0], $get['call'][1]));
+        //         // call_user_func(array(new $get['call'][0], $get['call'][1]));
+        //         break;
+        //     }
+        // }
+        //Caso não esteja definida retorna o erro
+        // echo $this->mensage('RouterNotExist');
     }
 }

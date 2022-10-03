@@ -1,15 +1,15 @@
 <?php
 
-use App\Controller\HomeController;
+//Para chamar uma rota e necessario 4 parametros
+//1 - Tipo de requisição - GET, POST, PUT, DELETE
+//2 - O nome da rota, não obrigatorio ser o mesmo nome da FUNCTION da controller
+//3 - O nome da controller que esta sendo requisitada a FUNCTION
+//4 - O nome da FUNCTION que esta sendo requisitada
+//Exemplo: 
+//$this->get('ClienteCadastro', 'ClienteController', 'cadastro');
 
-$this->get('/', [HomeController::class, 'index']);
+$this->get('/', 'HomeController', 'index');
 
-$this->get('home', [HomeController::class, 'home']);
+$this->get('inicio', 'HomeController', 'home');
 
-$this->get('teste', function () {
-    echo 'Estou na Teste!!!';
-});
-
-$this->get('teste/user', function () {
-    echo 'Estou na User!!!';
-});
+$this->get('teste', 'HomeController', 'teste');

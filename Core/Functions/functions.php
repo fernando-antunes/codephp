@@ -19,10 +19,11 @@ function segment($segment)
 
     $uri = array_values(array_filter(explode('/', $request_uri)));
 
-    if ($uri[$segment] != FALSE) {
+
+    if (!empty($uri[$segment]) and $uri[$segment] != FALSE) {
         return $uri[$segment];
     } else {
-        return 0;
+        return;
     }
 }
 
@@ -33,12 +34,16 @@ function segment_array($array = [], $remove = [], $separator = NULL)
 
     $uri = array_values(array_filter(explode('/', $request_uri)));
 
+    $array_return = '';
+
     //Remove as posições selecionadas
     if (!empty($remove) and !empty($uri)) {
         foreach ($remove as $r) {
             unset($uri[$r]);
         }
     }
+
+    // dd($array);
 
     //Retorna apenas as posições requisitadas
     if (!empty($array) and !empty($uri)) {
@@ -50,10 +55,11 @@ function segment_array($array = [], $remove = [], $separator = NULL)
     }
 
     //quebra o array e junta o mesmo
-    //A não ser que seja apenas / que ai vai retorna para a index
     if (!empty($separator) and !empty($uri[1])) {
         $array_return = implode($separator, $array_return);
-    }else{
+    }
+
+    if (empty($array_return)) {
         $array_return = '/';
     }
 
