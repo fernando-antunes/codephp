@@ -11,9 +11,9 @@
             "App\\": "App/"
         },
         "files": [
-            "./Core/Functions/functions.php",
-            "./Core/Router/router.php",
-            "./Core/Controller/controller.php",
+            "./Core/functions.php",
+            "./Core/router.php",
+            "./Core/controller.php",
             "./App/Config/Config.php"
         ]
     },
