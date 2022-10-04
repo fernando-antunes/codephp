@@ -12,4 +12,4 @@ $this->get('/', 'HomeController', 'index');
 
 $this->get('inicio', 'HomeController', 'home');
 
-$this->get('teste', 'HomeController', 'teste');
+$this->get('testes', 'HomeController', 'teste');

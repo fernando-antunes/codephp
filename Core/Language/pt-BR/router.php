@@ -2,5 +2,5 @@
 
 $languageRouter = [
     "RouterNotExist" => "Rota não existe!",
-    "RouterNotFound" => "Rota não encontrada!"
+    "FunctionNotFound" => "Função não encontrada!"
 ];

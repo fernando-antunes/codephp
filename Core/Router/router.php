@@ -27,7 +27,9 @@ class Router
     {
         include('./Core/Language/' . LANGUAGE . '/router.php');
 
-        return $languageRouter[$mensage];
+        echo $languageRouter[$mensage];
+
+        exit;
     }
 
     private function inicializer()
@@ -41,7 +43,7 @@ class Router
     {
         $this->getArr[] = [
             'router' => $router,
-            'call' => $call, 
+            'call' => $call,
             'method' => $method
         ];
     }
@@ -66,8 +68,6 @@ class Router
     private function executeGet()
     {
 
-        // dd($this->getArr);
-
         //Pega os parametros GET recebido
         $params_get = segment_array([], [0, 1], ',');
 
@@ -87,30 +87,18 @@ class Router
 
         //Verifica se não esta vazio o $method
         if (empty($controller_name)) {
-            echo 'Rota não encontrada!';
+            $this->mensage('RouterNotExist');
         }
 
+        //Chama a controller
         $controller = "\\App\\Controller\\" . $controller_name;
-
         $instance = new $controller;
 
-        // dd($params_get);
+        //Verifica se a function selecionada existe
+        if (!is_callable(array($instance, $controller_function))) {
+            $this->mensage('FunctionNotFound');
+        }
 
-        echo call_user_func_array([$instance, $controller_function], [$params_get]);
-
-        // dd($instance);
-
-        //Pega as rotas definidas
-        // foreach ($this->getArr as $get) {
-        //     //Verifica se a rota digitada esta nas definidas
-        //     if ($get['router'] == segment_array([1, 2], [], '/')) {
-        //         //Chama a call que esta sendo requisitada
-        //         call_user_func(array(new $get['call'][0], $get['call'][1]));
-        //         // call_user_func(array(new $get['call'][0], $get['call'][1]));
-        //         break;
-        //     }
-        // }
-        //Caso não esteja definida retorna o erro
-        // echo $this->mensage('RouterNotExist');
+        return call_user_func_array([$instance, $controller_function], [$params_get]);
     }
 }
