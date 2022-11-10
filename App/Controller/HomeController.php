@@ -2,14 +2,13 @@
 
 namespace App\Controller;
 
-use Core\Controller\Controller;
+use Core\Controller;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        echo 'teste';
-        // $this->view('home');
+        $this->view('home');
     }
 
     public function home($numero, $nome)
